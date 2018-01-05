@@ -167,7 +167,7 @@
                         <ColumnDefinition Width="1015*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="MainDataGrid1" Grid.Column="5" Grid.Row="3" Margin="1,29,0,0" BorderBrush="{x:Null}" Grid.ColumnSpan="2"/>
+                    <DataGrid x:Name="MainDataGrid1" Grid.Column="5" Grid.Row="3" Margin="1,29,0,0" BorderBrush="{x:Null}" Grid.ColumnSpan="2" IsReadOnly="True"/>
                     <Rectangle Grid.Column="6" Fill="#FF4E7AC7" Stroke="{x:Null}" Grid.Row="1" Grid.RowSpan="2"/>
 
                     <Rectangle Grid.Column="1" Fill="#FF4E7AC7" Grid.Row="1" Stroke="{x:Null}" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
@@ -184,7 +184,7 @@
 
                     <TreeView/>
                     <WrapPanel Grid.Column="6" Grid.Row="1" Grid.RowSpan="2">
-                        <Button x:Name="buttonDTB" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Click="buttonXEM_Click">
+                        <Button x:Name="buttonDTB" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="White" Click="buttonDTB_Click">
                             <WrapPanel>
                                 <Image Source="icon/calculator.png" />
                                 <TextBlock>Điểm trung bình</TextBlock>

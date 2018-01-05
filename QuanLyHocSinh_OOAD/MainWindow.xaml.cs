@@ -875,5 +875,43 @@ namespace QuanLyHocSinh_OOAD
 
             NewLoadData(str);
         }
+
+        bool checkrow(DataRowView testrow)
+        {
+            for (int i = 0; i < testrow.Row.Table.Columns.Count; i++)
+            {
+                if (testrow[i] != null)
+                {
+                    if (testrow[i].ToString() != string.Empty)
+                    {
+                        return true;
+                    }
+                }
+            }
+            // else false
+            return false;
+        }
+
+        private void buttonDTB_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView row = (DataRowView)MainDataGrid1.SelectedItem;
+                if (checkrow(row))
+                {
+                    //mahocsinh.Text = row["Mã học sinh"].ToString();
+                    string strMaHS = row["Mã học sinh"].ToString();
+                    //MessageBox.Show(strMaHS);
+                    formBangDiem formbangDiem = new formBangDiem(strMaHS);
+                    formbangDiem.ShowDialog();
+                }
+                else
+                    MessageBox.Show("Vui lòng chọn học sinh cần xem");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Vui lòng chọn học sinh cần xem");
+            }
+        }
     }
 }

@@ -253,33 +253,44 @@ namespace QuanLyHocSinh_OOAD
             double hs1 = (Convert.ToDouble(h1d1.Text) + Convert.ToDouble(h1d2.Text) + Convert.ToDouble(h1d3.Text) + Convert.ToDouble(h1d4.Text) + Convert.ToDouble(h1d5.Text)) / GetHeso1(monhoc.Text);
             double hs2 = (Convert.ToDouble(h2d1.Text) + Convert.ToDouble(h2d2.Text) + Convert.ToDouble(h2d3.Text) + Convert.ToDouble(h2d4.Text) + Convert.ToDouble(h2d5.Text)) / GetHeso2(monhoc.Text);
             double thi = Convert.ToDouble(diemthi.Text);
-            float dtb = Convert.ToSingle((hs1 + hs2 * 2 + thi * 3) / 6);
+            float dtb = (float)Math.Round(Convert.ToSingle((hs1 + hs2 * 2 + thi * 3)*1.0 / 6), 2);
+            //MessageBox.Show(dtb.ToString());
             string danhgia = CheckDat(dtb);
-            conn.Open();
-            SqlCommand cmd2 = new SqlCommand();
-            cmd2.Connection = conn;
-            cmd2.CommandText = "update KETQUAMON set H1D1 = @H1D1, H1D2 = @H1D2, H1D3 = @H1D3, H1D4 = @H1D4, H1D5 = @H1D5, H2D1 = @H2D1, H2D2 = @H2D2, H2D3 = @H2D3, H2D4 = @H2D4, H2D5 = @H2D5, THI = @THI, DTB = @DTB, DANHGIA = @DANHGIA where MAHS = @MAHS and MAMH = @MAMH and NAMHOC = @NAMHOC and HOCKY = @HOCKY";
-            cmd2.Parameters.AddWithValue("@MAMH", monhoc.Text);
-            cmd2.Parameters.AddWithValue("@MAHS", mahocsinh.Text.ToString());
-            cmd2.Parameters.AddWithValue("@DTB", dtb);
-            cmd2.Parameters.AddWithValue("@DANHGIA", danhgia);
-            cmd2.Parameters.AddWithValue("@NAMHOC", namhoc.Text);
-            cmd2.Parameters.AddWithValue("@HOCKY", hocky.Text);
-            cmd2.Parameters.AddWithValue("@H1D1", h1d1.Text);
-            cmd2.Parameters.AddWithValue("@H1D2", h1d2.Text);
-            cmd2.Parameters.AddWithValue("@H1D3", h1d3.Text);
-            cmd2.Parameters.AddWithValue("@H1D4", h1d4.Text);
-            cmd2.Parameters.AddWithValue("@H1D5", h1d5.Text);
-            cmd2.Parameters.AddWithValue("@H2D1", h2d1.Text);
-            cmd2.Parameters.AddWithValue("@H2D2", h2d2.Text);
-            cmd2.Parameters.AddWithValue("@H2D3", h2d3.Text);
-            cmd2.Parameters.AddWithValue("@H2D4", h2d4.Text);
-            cmd2.Parameters.AddWithValue("@H2D5", h2d5.Text);
-            cmd2.Parameters.AddWithValue("@THI", diemthi.Text);
-            cmd2.ExecuteNonQuery();
-            AverageGrade avgGrade = new AverageGrade(mahocsinh.Text.ToString(), namhoc.Text, hocky.Text);
-            avgGrade.UpdateDTB();
-            conn.Close();
+            try
+            {
+                conn.Open();
+                SqlCommand cmd2 = new SqlCommand();
+                cmd2.Connection = conn;
+                cmd2.CommandText = "update KETQUAMON set H1D1 = @H1D1, H1D2 = @H1D2, H1D3 = @H1D3, H1D4 = @H1D4, H1D5 = @H1D5, H2D1 = @H2D1, H2D2 = @H2D2, H2D3 = @H2D3, H2D4 = @H2D4, H2D5 = @H2D5, THI = @THI, DTB = @DTB, DANHGIA = @DANHGIA where MAHS = @MAHS and MAMH = @MAMH and NAMHOC = @NAMHOC and HOCKY = @HOCKY";
+                cmd2.Parameters.AddWithValue("@MAMH", monhoc.Text);
+                cmd2.Parameters.AddWithValue("@MAHS", mahocsinh.Text.ToString());
+                cmd2.Parameters.AddWithValue("@DTB", dtb);
+                cmd2.Parameters.AddWithValue("@DANHGIA", danhgia);
+                cmd2.Parameters.AddWithValue("@NAMHOC", namhoc.Text);
+                cmd2.Parameters.AddWithValue("@HOCKY", hocky.Text);
+                cmd2.Parameters.AddWithValue("@H1D1", h1d1.Text);
+                cmd2.Parameters.AddWithValue("@H1D2", h1d2.Text);
+                cmd2.Parameters.AddWithValue("@H1D3", h1d3.Text);
+                cmd2.Parameters.AddWithValue("@H1D4", h1d4.Text);
+                cmd2.Parameters.AddWithValue("@H1D5", h1d5.Text);
+                cmd2.Parameters.AddWithValue("@H2D1", h2d1.Text);
+                cmd2.Parameters.AddWithValue("@H2D2", h2d2.Text);
+                cmd2.Parameters.AddWithValue("@H2D3", h2d3.Text);
+                cmd2.Parameters.AddWithValue("@H2D4", h2d4.Text);
+                cmd2.Parameters.AddWithValue("@H2D5", h2d5.Text);
+                cmd2.Parameters.AddWithValue("@THI", diemthi.Text);
+                cmd2.ExecuteNonQuery();
+                AverageGrade avgGrade = new AverageGrade(mahocsinh.Text.ToString(), namhoc.Text, hocky.Text);
+                avgGrade.UpdateDTB();
+                conn.Close();
+            }
+            catch (SqlException)
+            {
+                conn.Close();
+                MessageBox.Show("Có lỗi trong việc kết nối SQL server", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+
             Load_DataGrid(check_lophoc.Text);
         }
 
