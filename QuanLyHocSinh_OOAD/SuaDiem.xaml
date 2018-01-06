@@ -1,7 +1,7 @@
 ﻿<Window x:Class="QuanLyHocSinh_OOAD.SuaDiem"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SuaDiem" Height="537" Width="722">
+        Title="Sửa điểm" Height="537" Width="722">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="back1.png" Stretch="UniformToFill" TileMode="FlipXY"/>

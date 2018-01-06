@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MonHocInfo" Height="337.889" Width="402.768" Loaded="Window_Loaded">
+        Title="Thông tin môn học" Height="337.889" Width="402.768" Loaded="Window_Loaded">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="back1.png" Stretch="UniformToFill" TileMode="FlipXY"/>

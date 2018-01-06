@@ -124,8 +124,8 @@ namespace QuanLyHocSinh_OOAD
                 txtSiSo.IsReadOnly = true;
                 txtSTT.IsReadOnly = true;
                 txtTenLop.IsReadOnly = true;
-                cmbKhoi.IsReadOnly = true;
-                cmbMaGVCN.IsReadOnly = true;
+                cmbKhoi.IsEnabled = false;
+                cmbMaGVCN.IsEnabled = false;
                 btnLuu.IsEnabled = false;
             }
             else
@@ -165,11 +165,6 @@ namespace QuanLyHocSinh_OOAD
             conn.Close();
         }
 
-        private void btnThoat_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         //Ham kiểm tra các ký tự trong chuỗi có phải là số kg
         private bool IsNumber (string strValue)
         {
@@ -180,8 +175,14 @@ namespace QuanLyHocSinh_OOAD
             }
             return true;
         }
+        
+        //để thay đổi result để khi showdialog có thể so sánh dialog có tắt chưa để thực hiện việc refesh
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            this.DialogResult = true;
+        }
 
-        private void btnLuu_Click(object sender, RoutedEventArgs e)
+        private void btnLuu_Click_1(object sender, RoutedEventArgs e)
         {
             bool bTest = true;
 
@@ -240,7 +241,7 @@ namespace QuanLyHocSinh_OOAD
             {
                 txtSTT.Text = string.Concat("0" + txtSTT.Text);
             }
-                  
+
 
             string strMaLopMoi = String.Concat(cmbKhoi.Text + "A" + txtSTT.Text);
 
@@ -302,11 +303,10 @@ namespace QuanLyHocSinh_OOAD
                 }
             }
         }
-        
-        //để thay đổi result để khi showdialog có thể so sánh dialog có tắt chưa để thực hiện việc refesh
-        private void Window_Closing(object sender, CancelEventArgs e)
+
+        private void btnThoat_Click_1(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            this.Close();
         }
     }
 }

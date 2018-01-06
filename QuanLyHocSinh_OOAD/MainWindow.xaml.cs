@@ -587,26 +587,31 @@ namespace QuanLyHocSinh_OOAD
         #endregion
         private void buttonXOA_Click(object sender, RoutedEventArgs e)
         {
-            switch (iBang)
+            MessageBoxResult dialog = MessageBox.Show("Có chắc chắn muốn xóa không?", "Thông báo", MessageBoxButton.YesNo);
+            if (dialog == MessageBoxResult.Yes)
             {
-                case 1:
-                    DeleteLop();
-                    break;
-                case 2:
-                    DeleteGiaoVien();
-                    break;
-                case 3:
-                    DeleteMonHoc();
-                    break;
-                case 4:
-                    DeleteHocSinh();
-                    break;
-                case 5:
-                    DeleteHocSinh();
-                    break;
-                case 6:
-                    DeleteHocSinh();
-                    break;
+                switch (iBang)
+                {
+                    case 1:
+                        DeleteLop();
+                        break;
+                    case 2:
+                        DeleteGiaoVien();
+                        break;
+                    case 3:
+                        DeleteMonHoc();
+                        break;
+                    case 4:
+                        DeleteHocSinh();
+                        break;
+                    case 5:
+                        DeleteHocSinh();
+                        break;
+                    case 6:
+                        DeleteHocSinh();
+                        break;
+                }
+                //MessageBox.Show("Xóa thành công!");
             }
 
             buttonREFRES_Click(sender, e);

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" 
-        Title="frmBaoCaoLop" Height="600" Width="600" Loaded="Window_Loaded">
+        Title="Báo cáo lớp" Height="600" Width="600" Loaded="Window_Loaded">
     <Grid>
         <WindowsFormsHost HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="574">
             <rv:ReportViewer x:Name="ReportViewerDemo" />

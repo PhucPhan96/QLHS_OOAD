@@ -148,6 +148,7 @@ namespace QuanLyHocSinh_OOAD
                 cmd.Parameters.AddWithValue("@TENKHOA", txtTenKhoa.Text);
                 cmd.Parameters.AddWithValue("@TRGKHOA", strMaGV);
                 cmd.ExecuteNonQuery();
+                MessageBox.Show("Thêm khoa mới thành công!");
             }
             else
             {
@@ -156,6 +157,7 @@ namespace QuanLyHocSinh_OOAD
                 cmd.Parameters.AddWithValue("@TENKHOA", txtTenKhoa.Text);
                 cmd.Parameters.AddWithValue("@TRGKHOA", strMaGV);
                 cmd.ExecuteNonQuery();
+                MessageBox.Show("Cập nhật thông tin khoa thành công!");
             }
 
 
@@ -218,19 +220,23 @@ namespace QuanLyHocSinh_OOAD
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            if (dgvKhoa.SelectedIndex < 0)
-                return;
-            strOldMaKhoa = ((DataRowView)dgvKhoa.SelectedItem).Row[0].ToString();
+            MessageBoxResult dialog = MessageBox.Show("Có chắc chắn muốn xóa không?", "Thông báo", MessageBoxButton.YesNo);
+            if(dialog == MessageBoxResult.Yes)
+            {
+                if (dgvKhoa.SelectedIndex < 0)
+                    return;
+                strOldMaKhoa = ((DataRowView)dgvKhoa.SelectedItem).Row[0].ToString();
 
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("delete from KHOA where MAKHOA = @MAKHOA", conn);
-            cmd.Parameters.AddWithValue("@MAKHOA", strOldMaKhoa);
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            MessageBox.Show("Bạn đã xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-            strOldMaKhoa = "";
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("delete from KHOA where MAKHOA = @MAKHOA", conn);
+                cmd.Parameters.AddWithValue("@MAKHOA", strOldMaKhoa);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                MessageBox.Show("Bạn đã xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                strOldMaKhoa = "";
 
-            LoadData("select MAKHOA as 'Mã khoa', TENKHOA as 'Tên khoa', TRGKHOA as 'Mã trưởng khoa' from KHOA");
+                LoadData("select MAKHOA as 'Mã khoa', TENKHOA as 'Tên khoa', TRGKHOA as 'Mã trưởng khoa' from KHOA");
+            }
 
         }
 

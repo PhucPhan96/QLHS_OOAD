@@ -281,6 +281,7 @@ namespace QuanLyHocSinh_OOAD
                 cmd2.Parameters.AddWithValue("@THI", diemthi.Text);
                 cmd2.ExecuteNonQuery();
                 AverageGrade avgGrade = new AverageGrade(mahocsinh.Text.ToString(), namhoc.Text, hocky.Text);
+                MessageBox.Show("Sửa điểm thành công!");
                 avgGrade.UpdateDTB();
                 conn.Close();
             }

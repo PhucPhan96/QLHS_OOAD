@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" 
         mc:Ignorable="d"
-        Title="Report_GiaoVien" Height="500" Width="800">
+        Title="Báo cáo Giáo Viên" Height="500" Width="800">
     <Window.Background>
         <ImageBrush ImageSource="back1.png" Stretch="UniformToFill" TileMode="FlipXY"/>
     </Window.Background>

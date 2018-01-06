@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="HocSinhInfo" Height="350" Width="600" Closing="Window_Closing">
+        Title="Thông tin học sinh" Height="350" Width="600" Closing="Window_Closing">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="back1.png" TileMode="FlipXY" Stretch="UniformToFill"/>

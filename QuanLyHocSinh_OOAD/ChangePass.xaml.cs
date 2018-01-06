@@ -19,6 +19,7 @@ namespace QuanLyHocSinh_OOAD
             {
                 Password TaiKhoan = new Password();
                 TaiKhoan.ThayDoiPass(tenDN.Text, matKhau.Password, matKhaumoi.Password);
+                MessageBox.Show("Mật khẩu đã được thay đổi!");
             }
             else
             {

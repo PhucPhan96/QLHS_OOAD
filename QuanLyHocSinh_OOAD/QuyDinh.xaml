@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="QuyDinh" Height="400" Width="650">
+        Title="Quy định" Height="400" Width="650">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="back1.png" Stretch="UniformToFill" TileMode="FlipXY"/>

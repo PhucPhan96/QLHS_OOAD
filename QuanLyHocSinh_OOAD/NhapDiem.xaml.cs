@@ -18,6 +18,17 @@ namespace QuanLyHocSinh_OOAD
             
             check_lophoc.SelectedIndex = 0;
             Load_DataGrid(check_lophoc.SelectedItem.ToString());
+            h1d1.IsEnabled = false;
+            h1d2.IsEnabled = false;
+            h1d3.IsEnabled = false;
+            h1d4.IsEnabled = false;
+            h1d5.IsEnabled = false;
+            h2d1.IsEnabled = false;
+            h2d2.IsEnabled = false;
+            h2d3.IsEnabled = false;
+            h2d4.IsEnabled = false;
+            h2d5.IsEnabled = false;
+            diemthi.IsEnabled = false;
         }
 
         //public static string strConnectionString = "Data Source=DESKTOP-DLT0AO8;Initial Catalog=QLHS;Integrated Security=True";
@@ -159,6 +170,7 @@ namespace QuanLyHocSinh_OOAD
                 cm.CommandText = "SELECT HESO2 FROM MONHOC WHERE MAMH = @_MAMH";
                 cm.Parameters.AddWithValue("@_MAMH", maMonhoc);
                 heso = Convert.ToInt32(cm.ExecuteScalar().ToString());
+                
                 conn.Close();
                 return heso;
             }
@@ -167,7 +179,6 @@ namespace QuanLyHocSinh_OOAD
                 MessageBox.Show("Có lỗi trong việc kết nối SQL server", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return 0;
             }
-
         }
 
         private void Dis()
@@ -182,7 +193,7 @@ namespace QuanLyHocSinh_OOAD
             h2d3.IsEnabled = true;
             h2d2.IsEnabled = true;
             h2d1.IsEnabled = true;
-
+            diemthi.IsEnabled = true;
             switch (GetHeso1(box_mon.SelectedValue.ToString()))
             {
                 case 5:
@@ -269,9 +280,9 @@ namespace QuanLyHocSinh_OOAD
             }
         } 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {  
-            double hs1 = (Convert.ToDouble(h1d1.Text) + Convert.ToDouble(h1d2.Text) + Convert.ToDouble(h1d3.Text) + Convert.ToDouble(h1d4.Text) + Convert.ToDouble(h1d5.Text)) / GetHeso1(box_mon.SelectedItem.ToString());
-            double hs2 = (Convert.ToDouble(h2d1.Text) + Convert.ToDouble(h2d2.Text) + Convert.ToDouble(h2d3.Text) + Convert.ToDouble(h2d4.Text) + Convert.ToDouble(h2d5.Text)) / GetHeso2(box_mon.SelectedItem.ToString());
+        {
+            double hs1 = (Convert.ToDouble(h1d1.Text) + Convert.ToDouble(h1d2.Text) + Convert.ToDouble(h1d3.Text) + Convert.ToDouble(h1d4.Text) + Convert.ToDouble(h1d5.Text)) / GetHeso1(box_mon.SelectedValue.ToString());
+            double hs2 = (Convert.ToDouble(h2d1.Text) + Convert.ToDouble(h2d2.Text) + Convert.ToDouble(h2d3.Text) + Convert.ToDouble(h2d4.Text) + Convert.ToDouble(h2d5.Text)) / GetHeso2(box_mon.SelectedValue.ToString());
             double thi = Convert.ToDouble(diemthi.Text);
             float dtb = Convert.ToSingle((hs1 + hs2 * 2 + thi * 3) / 6);
             string danhgia = CheckDat(dtb);
@@ -279,7 +290,7 @@ namespace QuanLyHocSinh_OOAD
             SqlCommand cmd2 = new SqlCommand();
             cmd2.Connection = conn;
             cmd2.CommandText = "insert into KETQUAMON (MAHS, MAMH, NAMHOC, HOCKY, H1D1, H1D2, H1D3, H1D4, H1D5, H2D1, H2D2, H2D3, H2D4, H2D5,THI,DTB, DANHGIA) values (@MAHS, @MAMH, @NAMHOC, @HOCKY,@H1D1,@H1D2,@H1D3,@H1D4,@H1D5,@H2D1,@H2D2,@H2D3,@H2D4,@H2D5,@THI,@DTB,@DANHGIA)";
-            cmd2.Parameters.AddWithValue("@MAMH", box_mon.SelectedItem.ToString());
+            cmd2.Parameters.AddWithValue("@MAMH", box_mon.SelectedValue.ToString());
             cmd2.Parameters.AddWithValue("@DTB", dtb);
             cmd2.Parameters.AddWithValue("@MAHS", mahocsinh.Text.ToString());
             cmd2.Parameters.AddWithValue("@NAMHOC", namhoc.Text);
@@ -300,6 +311,7 @@ namespace QuanLyHocSinh_OOAD
             AverageGrade avgGrade = new AverageGrade(mahocsinh.Text.ToString(), namhoc.Text, box_hocky.Text);
             avgGrade.UpdateDTB();
             conn.Close();
+            MessageBox.Show("Nhập điểm thành công!");
             Load_DataGrid(check_lophoc.Text);
         }
 
@@ -316,6 +328,11 @@ namespace QuanLyHocSinh_OOAD
         private void check_lophoc_DropDownClosed(object sender, EventArgs e)
         {
             Load_DataGrid(check_lophoc.Text);
+        }
+
+        private void box_mon_DropDownClosed(object sender, EventArgs e)
+        {
+            Dis();
         }
     }
 }
