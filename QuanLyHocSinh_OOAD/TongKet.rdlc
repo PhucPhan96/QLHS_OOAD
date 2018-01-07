@@ -733,7 +733,6 @@
     </ReportParameter>
     <ReportParameter Name="HocKi">
       <DataType>String</DataType>
-      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

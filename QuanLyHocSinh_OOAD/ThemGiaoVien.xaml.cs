@@ -186,9 +186,17 @@ namespace QuanLyHocSinh_OOAD
                 //Close();
                 con.Close();
             }
-            else
-                MessageBox.Show("Dữ liệu không đúng qui cách, nhập lại", "THÔNG BÁO", MessageBoxButton.OK, MessageBoxImage.Warning); 
-            
+            else{
+                MessageBox.Show("Dữ liệu không đúng qui cách, nhập lại", "THÔNG BÁO", MessageBoxButton.OK, MessageBoxImage.Warning); }
+            txtCMND.Text = "";
+            hoten_them.Text = "";
+            gioitinh_them.Text = "";
+            diachi_them.Text = "";
+            cmbKhoa.Text = "";
+            ngayvaolam_them.Text = "";
+            hesoluong_them.Text = "";
+            mucluong_them.Text = "";
+            magv_them.Text = "";
         }
 
         private void gioitinh_them_SelectionChanged(object sender, SelectionChangedEventArgs e)

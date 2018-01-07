@@ -88,8 +88,6 @@ namespace QuanLyHocSinh_OOAD
                 new ReportParameter("HocKi", hocki.ToString())
             };
             ReportViewerDemo.LocalReport.SetParameters(rptParameter);
-
-
             ReportViewerDemo.RefreshReport();
         }
 

@@ -150,11 +150,10 @@ namespace QuanLyHocSinh_OOAD
                     conn.Open();
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = conn;
-                    cmd.CommandText = "INSERT INTO MONHOC VALUES(@MAMH,@TENMH,@KHOA,@KHOI,@HS1,@HS2)";
+                    cmd.CommandText = "INSERT INTO MONHOC VALUES(@MAMH,@TENMH,@KHOA,@HS1,@HS2)";
                     cmd.Parameters.AddWithValue("@MAMH", txtMaMH.Text);
                     cmd.Parameters.AddWithValue("@TENMH", txtTenMH.Text);
                     cmd.Parameters.AddWithValue("@KHOA", cmbKhoa.Text.Substring(0, 4));
-                    cmd.Parameters.AddWithValue("@KHOI", "");
                     cmd.Parameters.AddWithValue("HS1", cmbHS1.Text.Substring(0, 1));
                     cmd.Parameters.AddWithValue("@HS2", cmbHS2.Text.Substring(0, 1));
                     cmd.ExecuteNonQuery();
@@ -181,7 +180,6 @@ namespace QuanLyHocSinh_OOAD
                     cmd.Parameters.AddWithValue("@MAMH", txtMaMH.Text);
                     cmd.Parameters.AddWithValue("@TENMH", txtTenMH.Text);
                     cmd.Parameters.AddWithValue("@KHOA", cmbKhoa.Text.Substring(0,4));
-                    cmd.Parameters.AddWithValue("@KHOI", "");
                     cmd.Parameters.AddWithValue("HS1", cmbHS1.Text.Substring(0,1));
                     cmd.Parameters.AddWithValue("@HS2", cmbHS2.Text.Substring(0,1));
                     cmd.ExecuteNonQuery();

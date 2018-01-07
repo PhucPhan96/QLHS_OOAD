@@ -42,7 +42,8 @@ namespace QuanLyHocSinh_OOAD
             try
             {
                 conn.Open();
-                string Query = "SELECT * FROM MONHOC where KHOI = '"+khoi+"'";
+                //string Query = "SELECT * FROM MONHOC where KHOI = '"+khoi+"'";
+                string Query = "SELECT * FROM MONHOC";
                 SqlCommand cm = new SqlCommand(Query, conn);
                 cm.Connection = conn;
                 //SqlDataReader dr = cm.ExecuteReader();
@@ -104,7 +105,7 @@ namespace QuanLyHocSinh_OOAD
                 cm.Connection = conn;
                 cm.CommandType = CommandType.Text;
                 cm.Parameters.AddWithValue("@_malop", malop);
-                cm.CommandText = @"SELECT HOCSINH.MAHS as 'Mã học sinh', HOTEN as 'Họ tên', MALOP as 'Mã lớp', MAMH as 'Mã môn học', HOCKY as 'Học kì', HOCSINH.NAMHOC as 'Năm học', H1D1, H1D2, H1D3, H1D4, H1D5, H2D1, H2D2, H2D3, H2D4, H2D5, THI as 'Điểm thi', DTB as 'Điểm TB', DANHGIA as 'Đánh giá' FROM HOCSINH LEFT JOIN KETQUAMON ON HOCSINH.MAHS = KETQUAMON.MAHS WHERE MALOP = @_malop";
+                cm.CommandText = @"SELECT HOCSINH.MAHS as 'Mã học sinh', HOTEN as 'Họ tên', MALOP as 'Mã lớp', MAMH as 'Mã môn học', HOCKY as 'Học kì', HOCSINH.NAMHOC as 'Năm học', H1D1, H1D2, H1D3, H1D4, H1D5, H2D1, H2D2, H2D3, H2D4, H2D5, THI as 'Điểm thi', Round(DTB,2) as 'Điểm TB', DANHGIA as 'Đánh giá' FROM HOCSINH LEFT JOIN KETQUAMON ON HOCSINH.MAHS = KETQUAMON.MAHS WHERE MALOP = @_malop";
 
                 SqlDataAdapter sdaDataAdapter = new SqlDataAdapter(cm);
 
@@ -199,24 +200,39 @@ namespace QuanLyHocSinh_OOAD
                 case 5:
                     break;
                 case 4: h1d5.IsEnabled = false;
+                    h1d5.Text = "0";
                     break;
                 case 3: h1d5.IsEnabled = false;
+                    h1d5.Text = "0";
                     h1d4.IsEnabled = false;
+                    h1d4.Text = "0";
                     break;
                 case 2: h1d5.IsEnabled = false;
+                    h1d5.Text = "0";
                     h1d4.IsEnabled = false;
+                    h1d4.Text = "0";
                     h1d3.IsEnabled = false;
+                    h1d3.Text = "0";
                     break;
                 case 1: h1d5.IsEnabled = false;
+                    h1d5.Text = "0";
                     h1d4.IsEnabled = false;
+                    h1d4.Text = "0";
                     h1d3.IsEnabled = false;
+                    h1d3.Text = "0";
                     h1d2.IsEnabled = false;
+                    h1d2.Text = "0";
                     break;
                 case 0: h1d5.IsEnabled = false;
+                    h1d5.Text = "0";
                     h1d4.IsEnabled = false;
+                    h1d4.Text = "0";
                     h1d3.IsEnabled = false;
+                    h1d3.Text = "0";
                     h1d2.IsEnabled = false;
+                    h1d2.Text = "0";
                     h1d1.IsEnabled = false;
+                    h1d1.Text = "0";
                     break;
             }
 
@@ -224,33 +240,44 @@ namespace QuanLyHocSinh_OOAD
             {
                 case 5:
                     break;
-                case 4: h2d5.IsEnabled = false;
+                case 4: h1d5.IsEnabled = false;
+                    h1d5.Text = "0";
                     break;
-                case 3: h2d5.IsEnabled = false;
-                    h2d4.IsEnabled = false;
+                case 3: h1d5.IsEnabled = false;
+                    h1d5.Text = "0";
+                    h1d4.IsEnabled = false;
+                    h1d4.Text = "0";
                     break;
-                case 2: h2d5.IsEnabled = false;
-                    h2d4.IsEnabled = false;
-                    h2d3.IsEnabled = false;
+                case 2: h1d5.IsEnabled = false;
+                    h1d5.Text = "0";
+                    h1d4.IsEnabled = false;
+                    h1d4.Text = "0";
+                    h1d3.IsEnabled = false;
+                    h1d3.Text = "0";
                     break;
-                case 1: h2d5.IsEnabled = false;
-                    h2d4.IsEnabled = false;
-                    h2d3.IsEnabled = false;
-                    h2d2.IsEnabled = false;
+                case 1: h1d5.IsEnabled = false;
+                    h1d5.Text = "0";
+                    h1d4.IsEnabled = false;
+                    h1d4.Text = "0";
+                    h1d3.IsEnabled = false;
+                    h1d3.Text = "0";
+                    h1d2.IsEnabled = false;
+                    h1d2.Text = "0";
                     break;
-                case 0: h2d5.IsEnabled = false;
-                    h2d4.IsEnabled = false;
-                    h2d3.IsEnabled = false;
-                    h2d2.IsEnabled = false;
-                    h2d1.IsEnabled = false;
+                case 0: h1d5.IsEnabled = false;
+                    h1d5.Text = "0";
+                    h1d4.IsEnabled = false;
+                    h1d4.Text = "0";
+                    h1d3.IsEnabled = false;
+                    h1d3.Text = "0";
+                    h1d2.IsEnabled = false;
+                    h1d2.Text = "0";
+                    h1d1.IsEnabled = false;
+                    h1d1.Text = "0";
                     break;
             }
         }
 
-        private void box_mon_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Dis();
-        }
 
         private string CheckDat(float fDiem)
         {
@@ -284,7 +311,7 @@ namespace QuanLyHocSinh_OOAD
             double hs1 = (Convert.ToDouble(h1d1.Text) + Convert.ToDouble(h1d2.Text) + Convert.ToDouble(h1d3.Text) + Convert.ToDouble(h1d4.Text) + Convert.ToDouble(h1d5.Text)) / GetHeso1(box_mon.SelectedValue.ToString());
             double hs2 = (Convert.ToDouble(h2d1.Text) + Convert.ToDouble(h2d2.Text) + Convert.ToDouble(h2d3.Text) + Convert.ToDouble(h2d4.Text) + Convert.ToDouble(h2d5.Text)) / GetHeso2(box_mon.SelectedValue.ToString());
             double thi = Convert.ToDouble(diemthi.Text);
-            float dtb = Convert.ToSingle((hs1 + hs2 * 2 + thi * 3) / 6);
+            float dtb = (float)Math.Round(Convert.ToSingle((hs1 + hs2 * 2 + thi * 3) / 6), 2);
             string danhgia = CheckDat(dtb);
             conn.Open();
             SqlCommand cmd2 = new SqlCommand();
@@ -332,7 +359,10 @@ namespace QuanLyHocSinh_OOAD
 
         private void box_mon_DropDownClosed(object sender, EventArgs e)
         {
-            Dis();
+            if(box_mon.Text == "")
+            { MessageBox.Show("Mời chọn môn học!"); }
+            else { Dis(); }
+            
         }
     }
 }

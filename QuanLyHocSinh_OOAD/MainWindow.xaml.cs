@@ -367,7 +367,7 @@ namespace QuanLyHocSinh_OOAD
                     if (MainDataGrid.SelectedIndex > -1)
                     {
                         DataRowView row = (DataRowView)MainDataGrid.SelectedItem;
-                        SuaGiaoVien _suagv = new SuaGiaoVien(row["Mã giáo viên"].ToString(), row["Họ tên"].ToString(), row["Giới tính"].ToString(), row["Khoa"].ToString(), row["CMND"].ToString(), row["Ngày vào làm"].ToString(), row["Hệ số"].ToString(), row["Mức lương"].ToString(), row["Địa chỉ"].ToString(), 1);
+                        SuaGiaoVien _suagv = new SuaGiaoVien(row["Mã giáo viên"].ToString(), row["Họ tên"].ToString(), row["Giới tính"].ToString(), row["Khoa Quản Lý"].ToString(), row["CMND"].ToString(), row["Ngày vào làm"].ToString(), row["Hệ số"].ToString(), row["Mức lương"].ToString(), row["Địa chỉ"].ToString(), 1);
                         _suagv.ShowDialog();
                     }
                     break;

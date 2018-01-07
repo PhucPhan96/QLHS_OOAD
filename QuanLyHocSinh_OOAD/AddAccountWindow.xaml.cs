@@ -97,11 +97,7 @@ namespace QuanLyHocSinh_OOAD
 
             conn.Close();
 
-            txtTenDN.Clear();
-            passboxPassword.Clear();
-            passboxConfirm.Clear();
-            cmbMaGV.SelectedIndex = -1;
-            cmbQuyenTruyCap.SelectedIndex = -1;
+            this.Close();
         }
     }
 }

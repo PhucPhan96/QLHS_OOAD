@@ -34,7 +34,7 @@
         <TextBox x:Name="h2d5" HorizontalAlignment="Left" Height="29" Margin="587,72,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Text="0"/>
         <Label Content="Điểm thi" HorizontalAlignment="Left" Height="29" Margin="24,106,0,0" VerticalAlignment="Top" Width="138" Grid.Row="1"/>
         <TextBox x:Name="diemthi" HorizontalAlignment="Left" Height="29" Margin="167,106,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="205"/>
-        <DataGrid x:Name="data_grid" HorizontalAlignment="Left" Height="185" Margin="24,186,0,0" Grid.Row="1" VerticalAlignment="Top" Width="663" SelectionChanged="data_grid_SelectionChanged"/>
+        <DataGrid x:Name="data_grid" HorizontalAlignment="Left" Height="185" Margin="24,186,0,0" Grid.Row="1" VerticalAlignment="Top" Width="663" SelectionChanged="data_grid_SelectionChanged" IsReadOnly="True"/>
         <Button Content="Lưu" HorizontalAlignment="Left" Height="41" Margin="167,140,0,0" Grid.Row="1" VerticalAlignment="Top" Width="205" Click="Button_Click"/>
         <TextBlock x:Name="monhoc" HorizontalAlignment="Left" Height="29" Margin="578,78,-58,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="194"/>
         <TextBlock x:Name="hocky" HorizontalAlignment="Left" Height="29" Margin="167,112,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="194" Grid.RowSpan="2"/>

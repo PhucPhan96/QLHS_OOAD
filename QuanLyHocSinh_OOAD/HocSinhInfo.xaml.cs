@@ -390,25 +390,22 @@ namespace QuanLyHocSinh_OOAD
             switch (txtSTT.Text.Length)
             {
                 case 1:
-                    strSTT = string.Concat("000" + txtSTT.Text);
-                    break;
-                case 2:
-                    strSTT = string.Concat("00" + txtSTT.Text);
-                    break;
-                case 3:
                     strSTT = string.Concat("0" + txtSTT.Text);
                     break;
-                case 4:
+                case 2:
                     strSTT = txtSTT.Text;
                     break;
             }
 
-            string strMaHocSinh = string.Concat(strNamNhapHoc + strSTT);
-
+            string strMaHocSinh = string.Concat(strNamNhapHoc + cmbMaLop.SelectedValue.ToString() + strSTT);
             if (iLuaChon == 1)
             {
                 try
                 {
+                    if(txtCMND.Text == "")
+                    {
+                        txtCMND.Text = "0";
+                    }
                     conn.Open();
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = conn;
@@ -429,15 +426,15 @@ namespace QuanLyHocSinh_OOAD
                     UpdateSiSo(iLuaChon, cmbMaLop.Text, cmbMaLop.Text);
 
 
-                    txtDiaChi.Clear();
-                    txtHoVaTen.Clear();
-                    txtCMND.Clear();
-                    txtNamNhapHoc.Clear();
-                    txtNoiSinh.Clear();
-                    txtSTT.Clear();
-                    txtTenGVCN.Clear();
-                    cmbGioiTinh.SelectedValue = "";
-                    cmbMaLop.SelectedValue = "";
+                    //txtDiaChi.Clear();
+                    //txtHoVaTen.Clear();
+                    //txtCMND.Clear();
+                    //txtNamNhapHoc.Clear();
+                    //txtNoiSinh.Clear();
+                    //txtSTT.Clear();
+                    //txtTenGVCN.Clear();
+                    //cmbGioiTinh.SelectedValue = "";
+                    //cmbMaLop.SelectedValue = "";
 
                     
                     MessageBox.Show("Bạn đã nhập dữ liệu thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
