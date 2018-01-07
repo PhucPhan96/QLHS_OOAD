@@ -19,6 +19,10 @@ namespace QuanLyHocSinh_OOAD
             Load_DataGrid(check_lophoc.SelectedItem.ToString());
         }
 
+        public SuaDiem(string maHS)
+        {
+
+        }
         //public static string strConnectionString = "Data Source=DESKTOP-DLT0AO8;Initial Catalog=QLHS;Integrated Security=True";
         //SqlConnection conn = new SqlConnection(strConnectionString);
         SqlConnection conn = Connection.KetNoi();
@@ -82,7 +86,7 @@ namespace QuanLyHocSinh_OOAD
                 DataRowView row = (DataRowView)data_grid.SelectedItem;
                 mahocsinh.Text = row["Mã học sinh"].ToString();
                 tenhocsinh.Text = row["Họ tên"].ToString();
-                malop.Text = row["Mã lớp"].ToString();
+                //malop.Text = row["Mã lớp"].ToString();
                 namhoc.Text = row["Năm học"].ToString();
                 h1d1.Text = row["H1D1"].ToString();
                 h1d2.Text = row["H1D2"].ToString();
@@ -284,7 +288,7 @@ namespace QuanLyHocSinh_OOAD
             double hs2 = (Convert.ToDouble(h2d1.Text) + Convert.ToDouble(h2d2.Text) + Convert.ToDouble(h2d3.Text) + Convert.ToDouble(h2d4.Text) + Convert.ToDouble(h2d5.Text)) / GetHeso2(monhoc.Text);
             double thi = Convert.ToDouble(diemthi.Text);
             float dtb = (float)Math.Round(Convert.ToSingle((hs1 + hs2 * 2 + thi * 3) / 6), 2);
-            MessageBox.Show(dtb.ToString());
+            //MessageBox.Show(dtb.ToString());
             string danhgia = CheckDat(dtb);
             try
             {

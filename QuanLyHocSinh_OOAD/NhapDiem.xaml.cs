@@ -15,9 +15,11 @@ namespace QuanLyHocSinh_OOAD
         {
             InitializeComponent();
             fill_combobox_Check_lop();
-            
+            fill_combobox_MON();
+            //box_mon.Items.Add("Toán");
             check_lophoc.SelectedIndex = 0;
-            Load_DataGrid(check_lophoc.SelectedItem.ToString());
+            
+            Load_DataGrid();
             h1d1.IsEnabled = false;
             h1d2.IsEnabled = false;
             h1d3.IsEnabled = false;
@@ -38,7 +40,7 @@ namespace QuanLyHocSinh_OOAD
 
         void fill_combobox_MON()
         {
-            int khoi = Convert.ToInt32(check_lophoc.Text.ToString().Substring(0, 2));
+            //int khoi = Convert.ToInt32(check_lophoc.Text.ToString().Substring(0, 2));
             try
             {
                 conn.Open();
@@ -46,19 +48,15 @@ namespace QuanLyHocSinh_OOAD
                 string Query = "SELECT * FROM MONHOC";
                 SqlCommand cm = new SqlCommand(Query, conn);
                 cm.Connection = conn;
-                //SqlDataReader dr = cm.ExecuteReader();
-                //while (dr.Read())
-                //{
-                //    string MAMONHOC = dr.GetString(0);
-                //    box_mon.Items.Add(MAMONHOC);
-                //}
+
                 SqlDataAdapter da = new SqlDataAdapter(cm);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 box_mon.ItemsSource = dt.DefaultView;
                 box_mon.DisplayMemberPath = "TENMH";
                 box_mon.SelectedValuePath = "MAMH";
-                
+
+                box_mon.SelectedIndex = 0;
                 conn.Close();
 
             }
@@ -97,15 +95,18 @@ namespace QuanLyHocSinh_OOAD
         }
 
 
-        void Load_DataGrid(string malop)
+        void Load_DataGrid()
         {
             try
             {
+                //conn.Open();
                 SqlCommand cm = new SqlCommand();
                 cm.Connection = conn;
                 cm.CommandType = CommandType.Text;
-                cm.Parameters.AddWithValue("@_malop", malop);
-                cm.CommandText = @"SELECT HOCSINH.MAHS as 'Mã học sinh', HOTEN as 'Họ tên', MALOP as 'Mã lớp', MAMH as 'Mã môn học', HOCKY as 'Học kì', HOCSINH.NAMHOC as 'Năm học', H1D1, H1D2, H1D3, H1D4, H1D5, H2D1, H2D2, H2D3, H2D4, H2D5, THI as 'Điểm thi', Round(DTB,2) as 'Điểm TB', DANHGIA as 'Đánh giá' FROM HOCSINH LEFT JOIN KETQUAMON ON HOCSINH.MAHS = KETQUAMON.MAHS WHERE MALOP = @_malop";
+                cm.Parameters.AddWithValue("@_malop", check_lophoc.Text);
+                cm.Parameters.AddWithValue("@_monhoc", box_mon.SelectedValue.ToString());
+               // MessageBox.Show(box_mon.SelectedValue.ToString());
+                cm.CommandText = @"(SELECT HOCSINH.MAHS as 'Mã học sinh', HOTEN as 'Họ tên', MALOP as 'Mã lớp', TENMH as 'Tên môn học', HOCKY as 'Học kỳ', HOCSINH.NAMHOC as 'Năm học', H1D1, H1D2, H1D3, H1D4, H1D5, H2D1, H2D2, H2D3, H2D4, H2D5, THI as 'Điểm thi', Round(DTB,2) as 'Điểm TB', DANHGIA as 'Đánh giá' FROM HOCSINH LEFT JOIN KETQUAMON ON HOCSINH.MAHS = KETQUAMON.MAHS LEFT JOIN MONHOC ON KETQUAMON.MAMH = MONHOC.MAMH WHERE MALOP = @_malop EXCEPT SELECT HOCSINH.MAHS as 'Mã học sinh', HOTEN as 'Họ tên', MALOP as 'Mã lớp', TENMH as 'Tên môn học', HOCKY as 'Học kì', HOCSINH.NAMHOC as 'Năm học', H1D1, H1D2, H1D3, H1D4, H1D5, H2D1, H2D2, H2D3, H2D4, H2D5, THI as 'Điểm thi', Round(DTB,2) as 'Điểm TB', DANHGIA as 'Đánh giá' FROM HOCSINH LEFT JOIN KETQUAMON ON HOCSINH.MAHS = KETQUAMON.MAHS LEFT JOIN MONHOC ON KETQUAMON.MAMH = MONHOC.MAMH WHERE MALOP = @_malop AND MONHOC.MAMH <> @_monhoc)";
 
                 SqlDataAdapter sdaDataAdapter = new SqlDataAdapter(cm);
 
@@ -113,10 +114,13 @@ namespace QuanLyHocSinh_OOAD
                 dtDataTable.Clear();
                 sdaDataAdapter.Fill(dtDataTable);
                 data_grid.ItemsSource = dtDataTable.DefaultView;
-                fill_combobox_MON();
+                //fill_combobox_MON();
+                //conn.Close();
             }
-            catch (SqlException)
+            catch (Exception e)
             {
+                //conn.Close();
+                MessageBox.Show(e.ToString());
                 MessageBox.Show("Có lỗi trong việc kết nối SQL server", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
@@ -124,14 +128,54 @@ namespace QuanLyHocSinh_OOAD
 
         private void data_grid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
+            
             if (data_grid.SelectedIndex >= 0)
             {
                 DataRowView row = (DataRowView)data_grid.SelectedItem;
-                mahocsinh.Text = row["Mã học sinh"].ToString(); 
+                mahocsinh.Text = row["Mã học sinh"].ToString();
                 tenhocsinh.Text = row["Họ tên"].ToString();
-                malop.Text = row["Mã lớp"].ToString();
+                //malop.Text = row["Mã lớp"].ToString();
                 namhoc.Text = row["Năm học"].ToString();
             }
+            
+            if (box_mon.Text == "")
+            { MessageBox.Show("Mời chọn môn học!"); }
+            else { Dis(); }
+
+            try
+            {
+                conn.Open();
+                SqlCommand cm = new SqlCommand();
+                cm.Connection = conn;
+                cm.CommandType = CommandType.Text;
+                // MessageBox.Show(box_mon.SelectedValue.ToString());
+                cm.CommandText = @"SELECT MAHS, MAMH, HOCKY FROM KETQUAMON";
+
+                SqlDataAdapter sdaDataAdapter = new SqlDataAdapter(cm);
+
+                DataTable dt = new DataTable();
+                dt.Clear();
+                sdaDataAdapter.Fill(dt);
+                conn.Close();
+
+                //for (int i = 0; i < dt.Rows.Count - 1; i++)
+                //{
+                //    if (row["Mã học sinh"].ToString() == dt.Rows[i][0].ToString() &&
+                //        box_mon.SelectedValue.ToString() == dt.Rows[i][1].ToString() &&
+                //        box_hocky.Text == dt.Rows[i][2].ToString())
+                //    {
+                //        MessageBox.Show("Trường dữ liệu đã tồn tại");
+                //    }
+                //}                
+            }
+            catch (Exception)
+            {
+                conn.Close();
+                MessageBox.Show("Có lỗi trong việc kết nối SQL server", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+
 
         }
 
@@ -152,6 +196,7 @@ namespace QuanLyHocSinh_OOAD
             }
             catch (SqlException)
             {
+                conn.Close();
                 MessageBox.Show("Có lỗi trong việc kết nối SQL server", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return 0;
             }
@@ -177,6 +222,7 @@ namespace QuanLyHocSinh_OOAD
             }
             catch (SqlException)
             {
+                conn.Close();
                 MessageBox.Show("Có lỗi trong việc kết nối SQL server", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return 0;
             }
@@ -339,7 +385,7 @@ namespace QuanLyHocSinh_OOAD
             avgGrade.UpdateDTB();
             conn.Close();
             MessageBox.Show("Nhập điểm thành công!");
-            Load_DataGrid(check_lophoc.Text);
+            Load_DataGrid();
         }
 
         private void check_lophoc_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -354,15 +400,15 @@ namespace QuanLyHocSinh_OOAD
 
         private void check_lophoc_DropDownClosed(object sender, EventArgs e)
         {
-            Load_DataGrid(check_lophoc.Text);
+            Load_DataGrid();
         }
 
         private void box_mon_DropDownClosed(object sender, EventArgs e)
         {
-            if(box_mon.Text == "")
-            { MessageBox.Show("Mời chọn môn học!"); }
-            else { Dis(); }
-            
+            Load_DataGrid();     
         }
+
+ 
+
     }
 }

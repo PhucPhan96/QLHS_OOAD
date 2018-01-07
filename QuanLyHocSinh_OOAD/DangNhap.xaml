@@ -18,7 +18,7 @@
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
             </TextBox.Foreground>
         </TextBox>
-        <PasswordBox x:Name="matKhau" Margin="560,0,640,240.25" FontSize="20" Password="********" GotFocus="matKhau_GotFocus" Height="39.5" VerticalAlignment="Bottom" />
+        <PasswordBox x:Name="matKhau" Margin="560,0,640,240.25" FontSize="20" Password="" GotFocus="matKhau_GotFocus" Height="39.5" VerticalAlignment="Bottom" />
         <Button Content="Đăng nhập " Margin="560,0,640,174" FontSize="16" Click="Button_Click" Height="35" VerticalAlignment="Bottom" BorderBrush="White" Foreground="White" Background="#FF4E7AC7"/>
         <TextBlock x:Name="txtHeader" Margin="438.076,273.273,501.244,357.727" TextWrapping="Wrap" Text="Quản lý Học sinh" Foreground="White" FontSize="48" Height="72"/>
         <Image x:Name="image" Height="134.273" Margin="560,139,649,0" VerticalAlignment="Top" Source="icon/school.png"/>
