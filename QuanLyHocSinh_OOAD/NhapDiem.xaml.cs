@@ -105,8 +105,8 @@ namespace QuanLyHocSinh_OOAD
                 cm.CommandType = CommandType.Text;
                 cm.Parameters.AddWithValue("@_malop", check_lophoc.Text);
                 cm.Parameters.AddWithValue("@_monhoc", box_mon.SelectedValue.ToString());
-               // MessageBox.Show(box_mon.SelectedValue.ToString());
-                cm.CommandText = @"(SELECT HOCSINH.MAHS as 'Mã học sinh', HOTEN as 'Họ tên', MALOP as 'Mã lớp', TENMH as 'Tên môn học', HOCKY as 'Học kỳ', HOCSINH.NAMHOC as 'Năm học', H1D1, H1D2, H1D3, H1D4, H1D5, H2D1, H2D2, H2D3, H2D4, H2D5, THI as 'Điểm thi', Round(DTB,2) as 'Điểm TB', DANHGIA as 'Đánh giá' FROM HOCSINH LEFT JOIN KETQUAMON ON HOCSINH.MAHS = KETQUAMON.MAHS LEFT JOIN MONHOC ON KETQUAMON.MAMH = MONHOC.MAMH WHERE MALOP = @_malop EXCEPT SELECT HOCSINH.MAHS as 'Mã học sinh', HOTEN as 'Họ tên', MALOP as 'Mã lớp', TENMH as 'Tên môn học', HOCKY as 'Học kì', HOCSINH.NAMHOC as 'Năm học', H1D1, H1D2, H1D3, H1D4, H1D5, H2D1, H2D2, H2D3, H2D4, H2D5, THI as 'Điểm thi', Round(DTB,2) as 'Điểm TB', DANHGIA as 'Đánh giá' FROM HOCSINH LEFT JOIN KETQUAMON ON HOCSINH.MAHS = KETQUAMON.MAHS LEFT JOIN MONHOC ON KETQUAMON.MAMH = MONHOC.MAMH WHERE MALOP = @_malop AND MONHOC.MAMH <> @_monhoc)";
+                //MessageBox.Show(box_mon.SelectedValue.ToString());
+                cm.CommandText = @"SELECT HOCSINH.MAHS as 'Mã học sinh', HOTEN as 'Họ tên', MALOP as 'Mã lớp', MAMH as 'Tên môn học', HOCKY as 'Học kỳ', HOCSINH.NAMHOC as 'Năm học', H1D1, H1D2, H1D3, H1D4, H1D5, H2D1, H2D2, H2D3, H2D4, H2D5, THI as 'Điểm thi', Round(DTB,2) as 'Điểm TB', DANHGIA as 'Đánh giá' FROM HOCSINH LEFT JOIN KETQUAMON ON HOCSINH.MAHS = KETQUAMON.MAHS AND MAMH = @_monhoc WHERE MALOP = @_malop";
 
                 SqlDataAdapter sdaDataAdapter = new SqlDataAdapter(cm);
 
